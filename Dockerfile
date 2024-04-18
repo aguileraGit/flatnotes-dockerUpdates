@@ -23,6 +23,8 @@ ENV PUID=1000
 ENV PGID=1000
 ENV EXEC_TOOL=gosu
 
+ENV APP_PORT=8080
+
 ENV APP_PATH=/app
 ENV FLATNOTES_PATH=/data
 
@@ -46,8 +48,9 @@ COPY server ./server
 COPY --from=build ${BUILD_DIR}/client/dist ./client/dist
 
 VOLUME /data
-EXPOSE 8080/tcp
-HEALTHCHECK --interval=60s --timeout=10s CMD curl -f http://localhost:8080/health || exit 1
+# Is probably not needed per https://docs.docker.com/reference/dockerfile/#expose
+EXPOSE ${APP_PORT}/tcp
+HEALTHCHECK --interval=60s --timeout=10s CMD curl -f http://localhost:${APP_PORT}/health || exit 1
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh

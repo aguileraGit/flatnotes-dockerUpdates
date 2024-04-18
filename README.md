@@ -88,17 +88,41 @@ services:
       FLATNOTES_USERNAME: "user"
       FLATNOTES_PASSWORD: "changeMe!"
       FLATNOTES_SECRET_KEY: "aLongRandomSeriesOfCharacters"
+      
+      #Optional. Change the port of the service
+      APP_PORT:8181
     volumes:
       - "./data:/data"
       # Optional. Allows you to save the search index in a different location: 
       # - "./index:/data/.flatnotes"
     ports:
       - "8080:8080"
+      
     restart: unless-stopped
 ```
 
 See the [Environment Variables](https://github.com/dullage/flatnotes/wiki/Environment-Variables) article in the wiki for a full list of configuration options.
 
+**Wiki/Environment Variable Update**
+
+APP_PORT
+These are applicable to the Docker image only.
+
+This environment variable allow you to specify the port on which the Python uvicorn server listens on. The port section shall match.
+
+Docker Compose:
+```yaml
+    environment:
+        APP_PORT:8181
+    ports:
+        -"8181:8181"
+```
+
+Docker:
+``` shell
+-e APP_PORT=8181 \
+-p "8181:8181"
+```
 
 ## Roadmap
 

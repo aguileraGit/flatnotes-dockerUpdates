@@ -22,7 +22,7 @@ flatnotes_command="python -m \
                   main:app \
                   --app-dir server \
                   --host 0.0.0.0 \
-                  --port 8080 \
+                  --port ${APP_PORT} \
                   --proxy-headers \
                   --forwarded-allow-ips '*'"
 
